@@ -16,6 +16,11 @@ public abstract class ElementoComposicao {
         this.idComposicao = -1;
     }
 
+    public ElementoComposicao(JSONObject jsonObject) {
+        this.id = jsonObject.getInt("id");
+        this.idComposicao = jsonObject.getInt("idComposicao");
+    }
+
     public int getId() {
         return id;
     }
@@ -27,7 +32,7 @@ public abstract class ElementoComposicao {
     public JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", getId());
-        jsonObject.put("composicao", getIdComposicao());
+        jsonObject.put("idComposicao", getIdComposicao());
         return jsonObject;
     }
 }

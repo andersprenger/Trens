@@ -15,6 +15,11 @@ public class Vagao extends ElementoComposicao {
         this.capacidadeCarga = capacidadeCarga;
     }
 
+    public Vagao(JSONObject jsonObject) {
+        super(jsonObject);
+        this.capacidadeCarga = jsonObject.getInt("capacidadeCarga");
+    }
+
     public int getCapacidadeCarga() {
         return capacidadeCarga;
     }

@@ -18,6 +18,12 @@ public class Locomotiva extends ElementoComposicao {
         this.qtdadeMaxVagoes = qtdadeMaxVagoes;
     }
 
+    public Locomotiva(JSONObject jsonObject) {
+        super(jsonObject);
+        this.pesoMaximo = jsonObject.getDouble("pesoMaximo");
+        this.qtdadeMaxVagoes = jsonObject.getInt("qtdadeMaxVagoes");
+    }
+
     public double getPesoMaximo() {
         return pesoMaximo;
     }
