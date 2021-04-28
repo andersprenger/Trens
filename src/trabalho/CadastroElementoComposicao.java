@@ -45,31 +45,6 @@ public class CadastroElementoComposicao {
         return null;
     }
 
-    public JSONObject toJSONObject () {
-        JSONObject jsonObject = new JSONObject();
-
-        JSONArray array = new JSONArray();
-        for (ElementoComposicao e : elementosComposicao) {
-            array.put(e.toJSONObject());
-        }
-
-        jsonObject.put("elementosComposicao", array);
-
-        return jsonObject;
-    }
-
-    public void loadFromJSONObject(JSONObject jsonObject) {
-        JSONArray array = jsonObject.getJSONArray("elementosComposicao");
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject e = (JSONObject) array.get(i);
-            if (e.getBoolean("ehLocomotiva")) {
-                cadastra(new Locomotiva(e));
-            } else {
-                cadastra(new Vagao(e));
-            }
-        }
-    }
-
     public void persiste() {
         String fileName = "elementos.json";
         Path path = Path.of(fileName).toAbsolutePath();
@@ -90,6 +65,31 @@ public class CadastroElementoComposicao {
         } catch (IOException x) {
             System.err.format("Erro de E/S: %s%n", x);
         }
+    }
+
+    public void loadFromJSONObject(JSONObject jsonObject) {
+        JSONArray array = jsonObject.getJSONArray("elementosComposicao");
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject e = (JSONObject) array.get(i);
+            if (e.getBoolean("ehLocomotiva")) {
+                cadastra(new Locomotiva(e));
+            } else {
+                cadastra(new Vagao(e));
+            }
+        }
+    }
+
+    public JSONObject toJSONObject () {
+        JSONObject jsonObject = new JSONObject();
+
+        JSONArray array = new JSONArray();
+        for (ElementoComposicao e : elementosComposicao) {
+            array.put(e.toJSONObject());
+        }
+
+        jsonObject.put("elementosComposicao", array);
+
+        return jsonObject;
     }
 
     @Override
