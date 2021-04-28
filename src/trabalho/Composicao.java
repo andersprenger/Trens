@@ -122,4 +122,22 @@ public class Composicao {
             return engataElemento(v);
         }
     }
+
+    private boolean desengataElemento (ElementoComposicao e) {
+        if (composicao.get(composicao.size() - 1) == e) {
+            if (composicao.remove(e)) {
+                e.setIdComposicao(null);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean desengataLocomotiva (Locomotiva l) {
+        return desengataElemento(l);
+    }
+
+    public boolean desengataVagao (Vagao v) {
+        return desengataElemento(v);
+    }
 }
