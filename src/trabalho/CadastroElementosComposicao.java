@@ -11,10 +11,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CadastroElementoComposicao {
+public class CadastroElementosComposicao {
     private ArrayList<ElementoComposicao> elementosComposicao;
 
-    public CadastroElementoComposicao () {
+    public CadastroElementosComposicao() {
         this.elementosComposicao = new ArrayList<>();
     }
 
