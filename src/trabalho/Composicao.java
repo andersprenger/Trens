@@ -1,5 +1,6 @@
 package trabalho;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -7,6 +8,39 @@ import java.util.ArrayList;
 public class Composicao {
     private int id;
     private ArrayList<ElementoComposicao> composicao;
+
+    public Composicao (int id) {
+        this.id = id;
+        this.composicao = new ArrayList<>();
+    }
+
+    public Composicao (JSONObject jsonObject) {
+        this.id = jsonObject.getInt("id");
+        this.composicao = new ArrayList<>();
+
+        JSONArray arrayComposicao = jsonObject.getJSONArray("array");
+        for (int i = 0; i < arrayComposicao.length(); i++) {
+            JSONObject e = (JSONObject) arrayComposicao.get(i);
+            if (e.getBoolean("locomotiva")) {
+                composicao.add(new Locomotiva(e));
+            } else {
+                composicao.add(new Vagao(e));
+            }
+        }
+    }
+
+    public JSONObject toJSONObject () {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", getId());
+
+        JSONArray arrayComposicao = new JSONArray();
+        for (ElementoComposicao e : composicao) {
+            arrayComposicao.put(e.toJSONObject());
+        }
+
+        jsonObject.put("elementosComposicao", arrayComposicao);
+        return jsonObject;
+    }
 
     public int getId() {
         return id;
