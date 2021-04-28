@@ -1,5 +1,8 @@
 package trabalho;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class CadastroComposicoes {
@@ -52,5 +55,18 @@ public class CadastroComposicoes {
             }
         }
         return false;
+    }
+
+    public JSONObject toJSONObject () {
+        JSONObject jsonObject = new JSONObject();
+
+        JSONArray array = new JSONArray();
+        for (Composicao c : composicoes) {
+            array.put(c.toJSONObject());
+        }
+
+        jsonObject.put("composicoes", array);
+
+        return jsonObject;
     }
 }
