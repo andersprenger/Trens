@@ -3,7 +3,7 @@ package trabalho;
 public class Main {
 
     public static void main(String[] args) {
-	    CadastroElementoComposicao ce = new CadastroElementoComposicao();
+	    CadastroElementosComposicao ce = new CadastroElementosComposicao();
 
 		/*
 		ce.cadastra(new Locomotiva(1,200d,21));
