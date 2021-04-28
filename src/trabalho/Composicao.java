@@ -1,5 +1,8 @@
 package trabalho;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Composicao {
@@ -142,5 +145,18 @@ public class Composicao {
 
     public boolean desengataVagao (Vagao v) {
         return desengataElemento(v);
+    }
+
+    public JSONObject toJSONObject () {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", getId());
+
+        JSONArray arrayComposicao = new JSONArray();
+        for (ElementoComposicao e : composicao) {
+            arrayComposicao.put(e.toJSONObject());
+        }
+
+        jsonObject.put("elementosComposicao", arrayComposicao);
+        return jsonObject;
     }
 }
