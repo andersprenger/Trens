@@ -35,4 +35,7 @@ public abstract class ElementoComposicao {
         jsonObject.put("idComposicao", getIdComposicao());
         return jsonObject;
     }
+
+    @Override
+    public abstract String toString();
 }

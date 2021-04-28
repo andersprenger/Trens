@@ -39,4 +39,14 @@ public class Locomotiva extends ElementoComposicao {
         jsonObject.put("qtdadeMaxVagoes", getQtdadeMaxVagoes());
         return jsonObject;
     }
+
+    @Override
+    public String toString() {
+        return "Locomotiva{" +
+                "id=" + getId() +
+                ", idComposicao=" + getIdComposicao() +
+                ", pesoMaximo=" + getPesoMaximo() +
+                ", qtdadeMaxVagoes=" + getQtdadeMaxVagoes() +
+                '}';
+    }
 }

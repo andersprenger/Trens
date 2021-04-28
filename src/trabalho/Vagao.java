@@ -30,4 +30,13 @@ public class Vagao extends ElementoComposicao {
         jsonObject.put("capacidadeCarga", getCapacidadeCarga());
         return jsonObject;
     }
+
+    @Override
+    public String toString() {
+        return "Vagao{" +
+                "id=" + getId() +
+                ", idComposicao=" + getIdComposicao() +
+                ", capacidadeCarga=" + capacidadeCarga +
+                '}';
+    }
 }
