@@ -21,7 +21,7 @@ public class Composicao {
         JSONArray arrayComposicao = jsonObject.getJSONArray("array");
         for (int i = 0; i < arrayComposicao.length(); i++) {
             JSONObject e = (JSONObject) arrayComposicao.get(i);
-            if (e.getBoolean("locomotiva")) {
+            if (e.getBoolean("ehLocomotiva")) {
                 composicao.add(new Locomotiva(e));
             } else {
                 composicao.add(new Vagao(e));
