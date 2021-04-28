@@ -158,7 +158,7 @@ public class Composicao {
     }
 
     private boolean desengataElemento (ElementoComposicao e) {
-        if (composicao.get(composicao.size() - 1) == e) {
+        if (composicao.get(composicao.size() - 1).getId() == e.getId()) {
             if (composicao.remove(e)) {
                 e.setIdComposicao(null);
                 return true;
