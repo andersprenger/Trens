@@ -11,7 +11,6 @@ public class Composicao {
         this.composicao = new ArrayList<>();
     }
 
-
     public int getId() {
         return id;
     }

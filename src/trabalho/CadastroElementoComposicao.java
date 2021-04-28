@@ -1,20 +1,23 @@
 package trabalho;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class CadastroElementoComposicao {
-    private ArrayList<ElementoComposicao> elementosDeComposicao;
+    private ArrayList<ElementoComposicao> elementosComposicao;
 
     public CadastroElementoComposicao () {
-        this.elementosDeComposicao = new ArrayList<>();
+        this.elementosComposicao = new ArrayList<>();
     }
 
     public void cadastra (ElementoComposicao e) {
-        elementosDeComposicao.add(e);
+        elementosComposicao.add(e);
     }
 
     public int quantidade () {
-        return elementosDeComposicao.size();
+        return elementosComposicao.size();
     }
 
     public ElementoComposicao getPorPosicao (int index) {
@@ -23,16 +26,29 @@ public class CadastroElementoComposicao {
         } else if (index >= quantidade()) {
             return null;
         } else {
-            return elementosDeComposicao.get(index);
+            return elementosComposicao.get(index);
         }
     }
 
     public ElementoComposicao getPorId (int id) {
-        for (ElementoComposicao e : elementosDeComposicao) {
+        for (ElementoComposicao e : elementosComposicao) {
             if (e.getId() == id) {
                 return e;
             }
         }
         return null;
+    }
+
+    public JSONObject toJSONObject () {
+        JSONObject jsonObject = new JSONObject();
+
+        JSONArray array = new JSONArray();
+        for (ElementoComposicao e : elementosComposicao) {
+            array.put(e.toJSONObject());
+        }
+
+        jsonObject.put("elementosComposicao", array);
+
+        return jsonObject;
     }
 }
