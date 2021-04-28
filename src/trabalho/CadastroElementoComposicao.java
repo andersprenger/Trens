@@ -3,6 +3,11 @@ package trabalho;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class CadastroElementoComposicao {
@@ -50,5 +55,15 @@ public class CadastroElementoComposicao {
         jsonObject.put("elementosComposicao", array);
 
         return jsonObject;
+    }
+
+    public void persiste() {
+        String fileName = "elementos.json";
+        Path path = Path.of(fileName).toAbsolutePath();
+        try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
+            writer.print(this.toJSONObject().toString());
+        } catch (IOException x) {
+            System.err.format("Erro de E/S: %s%n", x);
+        }
     }
 }
