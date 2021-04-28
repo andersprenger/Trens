@@ -29,6 +29,14 @@ public abstract class ElementoComposicao {
         return idComposicao;
     }
 
+    public void setIdComposicao(Composicao composicao) {
+        if (composicao == null) {
+            this.idComposicao = -1;
+        } else {
+            this.idComposicao = composicao.getId();
+        }
+    }
+
     public JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", getId());
