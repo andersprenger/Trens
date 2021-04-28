@@ -33,7 +33,7 @@ public class Vagao extends ElementoComposicao {
 
     @Override
     public String toString() {
-        return "Vagao{" +
+        return "Vagao {" +
                 "id=" + getId() +
                 ", idComposicao=" + getIdComposicao() +
                 ", capacidadeCarga=" + capacidadeCarga +

@@ -42,7 +42,7 @@ public class Locomotiva extends ElementoComposicao {
 
     @Override
     public String toString() {
-        return "Locomotiva{" +
+        return "Locomotiva {" +
                 "id=" + getId() +
                 ", idComposicao=" + getIdComposicao() +
                 ", pesoMaximo=" + getPesoMaximo() +
