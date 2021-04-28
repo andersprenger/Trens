@@ -86,6 +86,7 @@ public class Composicao {
                 break;
             }
         }
+        pesoMaximo *= (double) (10 - (this.getQtdadeVagoes() - 1)) /10.0;
         return pesoMaximo;
     }
 
