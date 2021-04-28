@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CadastroComposicoes {
     private ArrayList<Composicao> composicoes;
 
-    public CadastroComposicoes() {
+    public CadastroComposicoes () {
         composicoes = new ArrayList<>();
     }
 
@@ -34,5 +34,23 @@ public class CadastroComposicoes {
             }
         }
         return null;
+    }
+
+    public boolean removePorId (int id) {
+        for (Composicao c : composicoes) {
+            if (c.getId() == id) {
+                composicoes.remove(c);
+                int ultimaPosicao = c.getQtdadeVagoes() + c.getQtdadeLocomotivas() - 1;
+                for (int i = ultimaPosicao; i >= 0; i--) {
+                    if (c.getVagao(i) != null) {
+                        c.desengataVagao(c.getVagao(i));
+                    } else {
+                        c.desengataLocomotiva(c.getLocomotiva(i));
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }
