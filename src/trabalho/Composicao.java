@@ -165,4 +165,18 @@ public class Composicao {
         jsonObject.put("elementosComposicao", arrayComposicao);
         return jsonObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder arr = new StringBuilder();
+        for (ElementoComposicao e : composicao) {
+            arr.append(e.toString());
+            arr.append("\n");
+        }
+
+        return  "Composicao {" +
+                     "id=" + id +
+                     ", composicao=[\n" + arr +
+                     "]\n}";
+    }
 }
