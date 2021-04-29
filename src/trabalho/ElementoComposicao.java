@@ -39,7 +39,7 @@ public abstract class ElementoComposicao {
 
     public JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ehLocomotiva", this instanceof Locomotiva);
+        jsonObject.put("tipo", this.getClass().getSimpleName());
         jsonObject.put("id", getId());
         jsonObject.put("idComposicao", getIdComposicao());
         return jsonObject;
