@@ -14,6 +14,11 @@ public class Composicao {
         this.composicao = new ArrayList<>();
     }
 
+    public Composicao (JSONObject jsonObject) {
+        this.id = jsonObject.getInt("id");
+        this.composicao = new ArrayList<>();
+    }
+
     public int getId() {
         return id;
     }

@@ -71,10 +71,12 @@ public class CadastroElementosComposicao {
         JSONArray array = jsonObject.getJSONArray("elementosComposicao");
         for (int i = 0; i < array.length(); i++) {
             JSONObject e = (JSONObject) array.get(i);
-            if (e.getBoolean("ehLocomotiva")) {
+            if (e.getString("tipo").equals("Locomotiva")) {
                 cadastra(new Locomotiva(e));
-            } else {
+            } else if (e.getString("tipo").equals("Vagao")) {
                 cadastra(new Vagao(e));
+            } else {
+                cadastra(new VagaoPassageiro(e));
             }
         }
     }
