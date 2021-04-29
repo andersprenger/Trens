@@ -121,4 +121,14 @@ public class CadastroComposicoes {
 
         return jsonObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("Cadastro Composições:\n");
+        for (Composicao c : composicoes) {
+            str.append(c.toString());
+            str.append("\n");
+        }
+        return str.toString();
+    }
 }
