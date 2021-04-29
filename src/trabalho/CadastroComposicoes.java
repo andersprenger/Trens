@@ -85,11 +85,27 @@ public class CadastroComposicoes {
         }
     }
 
-    public void loadFromJSONObject(JSONObject jsonObject, CadastroElementosComposicao ce) {
-        JSONArray array = jsonObject.getJSONArray("composicoes");
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject e = (JSONObject) array.get(i);
-            //code...
+    public void loadFromJSONObject(JSONObject jsonObject, CadastroElementosComposicao cadastroElementos) {
+        //Loading array of composições from the jsonObject instantiated from the file
+        JSONArray arrayComposicoes = jsonObject.getJSONArray("composicoes");
+        for (int i = 0; i < arrayComposicoes.length(); i++) {
+            Composicao composicao = new Composicao((JSONObject) arrayComposicoes.get(i));
+            //Loading array of elementos de composição from the array of composições
+            JSONArray arrayElementosComposicao = jsonObject.getJSONArray("elementosComposicao");
+            for (int j = 0; j < arrayElementosComposicao.length(); j++) {
+                //Loading an elemento de composição from the array of elementos de composição
+                JSONObject jsonElemento = (JSONObject) arrayElementosComposicao.get(i);
+                //Getting the elemento de composição in cadastro by it's id
+                int id = jsonElemento.getInt("id");
+                ElementoComposicao elementoComposicao = cadastroElementos.getPorId(id);
+                //Adding elemento de composição into cadastro
+                if (elementoComposicao instanceof Locomotiva) {
+                    composicao.engataLocomotiva((Locomotiva) elementoComposicao);
+                } else {
+                    composicao.engataVagao((Vagao) elementoComposicao);
+                }
+            }
+            cadastra(composicao);
         }
     }
 
