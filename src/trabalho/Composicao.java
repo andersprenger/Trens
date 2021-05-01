@@ -19,10 +19,16 @@ public class Composicao {
         this.composicao = new ArrayList<>();
     }
 
+    /**
+     * @return o id da composição.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @return a quantidade de locomotivas na composição.
+     */
     public int getQtdadeLocomotivas() {
         int count = 0;
         for (ElementoComposicao e : composicao) {
@@ -35,6 +41,9 @@ public class Composicao {
         return count;
     }
 
+    /**
+     * @return a quantidade de vagões na composição.
+     */
     public int getQtdadeVagoes() {
         int count = 0;
         for (ElementoComposicao e : composicao) {
@@ -47,6 +56,12 @@ public class Composicao {
         return count;
     }
 
+    /**
+     * Retorna o elemento de composição na composição caso a posição seja valida.<p/>
+     *
+     * @param posicao a ser buscada o elemento de composição.
+     * @return o elemento de composição na posição se encontrado ou null caso contrario.
+     */
     private ElementoComposicao getElementoComposicao(int posicao) {
         if (posicao >= 0 && posicao < composicao.size()) {
             return composicao.get(posicao);
@@ -54,23 +69,34 @@ public class Composicao {
         return null;
     }
 
-    public Locomotiva getLocomotiva (int posicao) {
+    /**
+     * Procura uma locomotiva na posição do parâmetro a ser retornada caso encontrada.<p/>
+     *
+     * @param posicao a ser buscada a locomotiva.
+     * @return a locomotiva na posição se encontrada ou null caso contrario.
+     */
+    public Locomotiva getLocomotiva(int posicao) {
         ElementoComposicao e = getElementoComposicao(posicao);
-        if (e == null) {
-            return null;
-        }
         return e instanceof Locomotiva ? (Locomotiva) e : null;
     }
 
+    /**
+     * Procura uma vagão (Vagao ou VagaoPassageiro) na posição do parâmetro a ser retornada caso encontrada.<p/>
+     *
+     * @param posicao a ser buscado o vagão.
+     * @return vagão na posição se encontrado ou null caso contrario.
+     */
     public Vagao getVagao(int posicao) {
         ElementoComposicao e = getElementoComposicao(posicao);
-        if (e == null) {
-            return null;
-        }
         return e instanceof Vagao ? (Vagao) e : null;
     }
 
-    private int maximoVagoes () {
+    /**
+     * Calcula o máximo de vagões da composição somando o máximo de vagões de todas as locomotivas da composição. <p/>
+     *
+     * @return máximo de vagões da composição.
+     */
+    private int maximoVagoes() {
         int maximoVagoes = 0;
         for (ElementoComposicao e : composicao) {
             if (e instanceof Locomotiva) {
@@ -82,7 +108,15 @@ public class Composicao {
         return maximoVagoes;
     }
 
-    private double pesoMaximo () {
+    /**
+     * Calcula e retorna o peso máximo suportado pela composição. <p/>
+     *
+     * O calculo do peso maximo é o somatório dos pesos máximos de cada locomotiva, menos 10% para
+     * cada locomotiva a partir da segunda sobre o somatório dos pesos máximos. <p/>
+     *
+     * @return o peso maximo dos vagões na composição.
+     */
+    private double pesoMaximo() {
         double pesoMaximo = 0;
         for (ElementoComposicao e : composicao) {
             if (e instanceof Locomotiva) {
@@ -95,7 +129,12 @@ public class Composicao {
         return pesoMaximo;
     }
 
-    private double pesoAtual () {
+    /**
+     * Calcula o peso atual da composição somando o peso de todos os elementos da composição. <p/>
+     *
+     * @return peso da composição.
+     */
+    private double pesoAtual() {
         double pesoAtual = 0;
         for (ElementoComposicao e : composicao) {
             if (e instanceof Vagao) {
@@ -105,6 +144,13 @@ public class Composicao {
         return pesoAtual;
     }
 
+    /**
+     * Metodo auxiliar que adiciona o elemento passado por parâmetro na composição
+     * se ele tiver o id de nenhuma (-1) ou desta composição em seu idComposicao. <p/>
+     *
+     * @param e elemento de composição (vagão, vagão de passageiros ou locomotiva) a engatado na composição.
+     * @return true se o elemento for engatada e false caso contrario.
+     */
     private boolean engataElemento(ElementoComposicao e) {
         if (e.getIdComposicao() != -1 && e.getIdComposicao() != this.getId()) {
             return false;
@@ -115,6 +161,12 @@ public class Composicao {
         }
     }
 
+    /**
+     * Engata (adiciona) uma locomotiva na composição se ela não houver nenhum vagão. <p/>
+     *
+     * @param l locomotiva a ser adicionada na composição.
+     * @return true se a locomotiva for engatada e false caso contrario.
+     */
     public boolean engataLocomotiva(Locomotiva l) {
         if (getQtdadeVagoes() > 0) {
             return false;
@@ -123,7 +175,13 @@ public class Composicao {
         }
     }
 
-    public boolean engataVagao (Vagao v) {
+    /**
+     * Engata (adiciona) um vagão na composicao  <p/>
+     *
+     * @param v locomotiva a ser adicionada na composição.
+     * @return true se a locomotiva for engatada e false caso contrario.
+     */
+    public boolean engataVagao(Vagao v) {
         if (getQtdadeLocomotivas() == 0) {
             return false;
         } else if (getQtdadeVagoes() == maximoVagoes()) {
@@ -151,15 +209,41 @@ public class Composicao {
         return false;
     }
 
-    public boolean desengataLocomotiva (Locomotiva l) {
+    /**
+     * Desengata uma Locomotiva da composição. <p/>
+     *
+     * @param l locomotiva a ser removida
+     * @return true se a locomotiva for removida e false caso contrario.
+     */
+    public boolean desengataLocomotiva(Locomotiva l) {
         return desengataElemento(l);
     }
 
-    public boolean desengataVagao (Vagao v) {
+    /**
+     * Desengata um Vagão (Vagao ou VagaoPassageiro) da composição. <p/>
+     *
+     * @param v vagão a ser removido
+     * @return true se a vagão for removida e false caso contrario.
+     */
+    public boolean desengataVagao(Vagao v) {
         return desengataElemento(v);
     }
 
-    public JSONObject toJSONObject () {
+    /**
+     * Desengata todos os vagões e locomotivas desta composição.
+     */
+    public void desfazer() {
+        for (int i = composicao.size() - 1; i >= 0; i--) {
+            desengataElemento(getElementoComposicao(i));
+        }
+    }
+
+    /**
+     * Retorna um JSONObject contendo o id e um array com os elementos da composição. <p/>
+     *
+     * @return jsonObject deste objeto.
+     */
+    public JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", getId());
 
