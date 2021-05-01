@@ -52,7 +52,10 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
 
     @Override
     public boolean removePorId(int id) {
-        return false;
+        ElementoComposicao e = getPorId(id);
+        //First e != null checks if the search above found the ElementoComposicao with the id passed as parameter.
+        //If it found the ElementoComposicao, cadastro.remove(e) is executed.
+        return e != null && cadastro.remove(e);
     }
 
     @Override
