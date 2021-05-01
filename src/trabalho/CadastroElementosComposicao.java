@@ -11,33 +11,37 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CadastroElementosComposicao {
-    private ArrayList<ElementoComposicao> elementosComposicao;
+public class CadastroElementosComposicao implements Cadastro<ElementoComposicao> {
+    private ArrayList<ElementoComposicao> cadastro;
 
     public CadastroElementosComposicao() {
-        this.elementosComposicao = new ArrayList<>();
+        this.cadastro = new ArrayList<>();
     }
 
+    @Override
     public void cadastra (ElementoComposicao e) {
-        elementosComposicao.add(e);
+        cadastro.add(e);
     }
 
+    @Override
     public int quantidade () {
-        return elementosComposicao.size();
+        return cadastro.size();
     }
 
+    @Override
     public ElementoComposicao getPorPosicao (int index) {
         if (index < 0) {
             return null;
         } else if (index >= quantidade()) {
             return null;
         } else {
-            return elementosComposicao.get(index);
+            return cadastro.get(index);
         }
     }
 
+    @Override
     public ElementoComposicao getPorId (int id) {
-        for (ElementoComposicao e : elementosComposicao) {
+        for (ElementoComposicao e : cadastro) {
             if (e.getId() == id) {
                 return e;
             }
@@ -45,16 +49,12 @@ public class CadastroElementosComposicao {
         return null;
     }
 
-    public void persiste() {
-        String fileName = "elementos.json";
-        Path path = Path.of(fileName).toAbsolutePath();
-        try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
-            writer.print(this.toJSONObject().toString());
-        } catch (IOException x) {
-            System.err.format("Erro de E/S: %s%n", x);
-        }
+    @Override
+    public boolean removePorId(int id) {
+        return false;
     }
 
+    @Override
     public void carrega() {
         String fileName = "elementos.json";
         Path path = Path.of(fileName).toAbsolutePath();
@@ -67,7 +67,7 @@ public class CadastroElementosComposicao {
         }
     }
 
-    public void loadFromJSONObject(JSONObject jsonObject) {
+    private void loadFromJSONObject(JSONObject jsonObject) throws JSONException {
         JSONArray array = jsonObject.getJSONArray("elementosComposicao");
         for (int i = 0; i < array.length(); i++) {
             JSONObject e = (JSONObject) array.get(i);
@@ -81,11 +81,23 @@ public class CadastroElementosComposicao {
         }
     }
 
+    @Override
+    public void persiste() {
+        String fileName = "elementos.json";
+        Path path = Path.of(fileName).toAbsolutePath();
+        try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
+            writer.print(this.toJSONObject().toString());
+        } catch (IOException x) {
+            System.err.format("Erro de E/S: %s%n", x);
+        }
+    }
+
+    @Override
     public JSONObject toJSONObject () {
         JSONObject jsonObject = new JSONObject();
 
         JSONArray array = new JSONArray();
-        for (ElementoComposicao e : elementosComposicao) {
+        for (ElementoComposicao e : cadastro) {
             array.put(e.toJSONObject());
         }
 
@@ -97,7 +109,7 @@ public class CadastroElementosComposicao {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("Cadastro de Elementos de Composicao\n");
-        for (ElementoComposicao e : elementosComposicao) {
+        for (ElementoComposicao e : cadastro) {
             str.append(e.toString());
             str.append("\n");
         }
