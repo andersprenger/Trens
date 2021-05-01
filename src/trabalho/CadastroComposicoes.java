@@ -11,19 +11,21 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CadastroComposicoes {
-    private ArrayList<Composicao> composicoes;
+public class CadastroComposicoes implements Cadastro<Composicao> {
+    private ArrayList<Composicao> cadastro;
+    private CadastroElementosComposicao patio;
 
-    public CadastroComposicoes () {
-        composicoes = new ArrayList<>();
+    public CadastroComposicoes (CadastroElementosComposicao patio) {
+        cadastro = new ArrayList<>();
+        this.patio = patio;
     }
 
     public void cadastra (Composicao c) {
-        composicoes.add(c);
+        cadastro.add(c);
     }
 
     public int quantidade () {
-        return composicoes.size();
+        return cadastro.size();
     }
 
     public Composicao getPorPosicao (int index) {
@@ -32,12 +34,12 @@ public class CadastroComposicoes {
         } else if (index >= quantidade()) {
             return null;
         } else {
-            return composicoes.get(index);
+            return cadastro.get(index);
         }
     }
 
     public Composicao getPorId (int id) {
-        for (Composicao c : composicoes) {
+        for (Composicao c : cadastro) {
             if (c.getId() == id) {
                 return c;
             }
@@ -46,9 +48,9 @@ public class CadastroComposicoes {
     }
 
     public boolean removePorId (int id) {
-        for (Composicao c : composicoes) {
+        for (Composicao c : cadastro) {
             if (c.getId() == id) {
-                composicoes.remove(c);
+                cadastro.remove(c);
                 int ultimaPosicao = c.getQtdadeVagoes() + c.getQtdadeLocomotivas() - 1;
                 for (int i = ultimaPosicao; i >= 0; i--) {
                     if (c.getVagao(i) != null) {
@@ -73,7 +75,7 @@ public class CadastroComposicoes {
         }
     }
 
-    public void carrega(CadastroElementosComposicao ce) {
+    public void carrega () {
         String fileName = "composicoes.json";
         Path path = Path.of(fileName).toAbsolutePath();
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))) {
@@ -98,7 +100,7 @@ public class CadastroComposicoes {
                 JSONObject jsonElemento = arrayElementosDaComposicao.getJSONObject(i);
                 //Getting the elemento de composição in cadastro by it's id
                 int id = jsonElemento.getInt("id");
-                ElementoComposicao elementoComposicao = cadastroElementos.getPorId(id);
+                ElementoComposicao elementoComposicao = patio.getPorId(id);
                 //Adding elemento de composição into cadastro
                 if (elementoComposicao instanceof Locomotiva) {
                     composicao.engataLocomotiva((Locomotiva) elementoComposicao);
@@ -114,7 +116,7 @@ public class CadastroComposicoes {
         JSONObject jsonObject = new JSONObject();
 
         JSONArray array = new JSONArray();
-        for (Composicao c : composicoes) {
+        for (Composicao c : cadastro) {
             array.put(c.toJSONObject());
         }
 
@@ -126,7 +128,7 @@ public class CadastroComposicoes {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("Cadastro Composições:\n");
-        for (Composicao c : composicoes) {
+        for (Composicao c : cadastro) {
             str.append(c.toString());
             str.append("\n");
         }
