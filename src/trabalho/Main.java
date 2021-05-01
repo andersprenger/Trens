@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 	    CadastroElementosComposicao ce = new CadastroElementosComposicao();
-	    CadastroComposicoes cc = new CadastroComposicoes();
+	    CadastroComposicoes cc = new CadastroComposicoes(ce);
 /*
 		ce.cadastra(new Locomotiva(1,200000d,21));
 	    ce.cadastra(new Locomotiva(2,150000d,15));
@@ -33,9 +33,9 @@ public class Main {
 
 	    ce.persiste();*/
 		ce.carrega();
-		cc.carrega(ce);
+		//cc.carrega(ce);
 
-/*		Composicao c1 = new Composicao(1);
+		Composicao c1 = new Composicao(1);
 		c1.engataLocomotiva((Locomotiva) ce.getPorId(1));
 		c1.engataVagao((Vagao) ce.getPorId(1100));
 		c1.engataVagao((Vagao) ce.getPorId(11000));
@@ -47,11 +47,11 @@ public class Main {
 		c2.engataVagao((Vagao) ce.getPorId(500));
 		c2.engataVagao((Vagao) ce.getPorId(19000));
 		c2.engataVagao((Vagao) ce.getPorId(13000));
-		cc.cadastra(c2);*/
+		cc.cadastra(c2);
 
 		//System.out.println(ce);
 		System.out.println(cc);
-		//cc.persiste();
+		cc.persiste();
 
     }
 }
