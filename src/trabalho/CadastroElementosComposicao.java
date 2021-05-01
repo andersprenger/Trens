@@ -115,7 +115,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
         StringBuilder str = new StringBuilder("Cadastro de Elementos de Composicao\n");
         for (ElementoComposicao e : cadastro) {
             str.append(e.toString());
-            str.append("\n");
+            str.append('\n');
         }
         return str.toString();
     }
