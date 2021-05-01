@@ -2,8 +2,6 @@ package trabalho;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 public interface Cadastro<T> {
     void cadastra(T t);
 
