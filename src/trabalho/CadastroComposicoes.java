@@ -98,7 +98,7 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
             JSONArray arrayElementosDaComposicao = jsonComposicao.getJSONArray("elementosComposicao");
             for (int j = 0; j < arrayElementosDaComposicao.length(); j++) {
                 //Loading an elemento de composição from the array of elementos de composição
-                JSONObject jsonElemento = arrayElementosDaComposicao.getJSONObject(i);
+                JSONObject jsonElemento = arrayElementosDaComposicao.getJSONObject(j);
                 //Getting the elemento de composição in cadastro by it's id
                 int id = jsonElemento.getInt("id");
                 ElementoComposicao elementoComposicao = patio.getPorId(id);
