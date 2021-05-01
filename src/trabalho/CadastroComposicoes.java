@@ -1,6 +1,7 @@
 package trabalho;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -81,13 +82,13 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))) {
             String jsonString = sc.nextLine();
             JSONObject jsonObject = new JSONObject(jsonString);
-            loadFromJSONObject(jsonObject, ce);
-        } catch (IOException x) {
+            loadFromJSONObject(jsonObject);
+        } catch (IOException | JSONException x) {
             System.err.format("Erro de E/S: %s%n", x);
         }
     }
 
-    public void loadFromJSONObject(JSONObject jsonObject, CadastroElementosComposicao cadastroElementos) {
+    private void loadFromJSONObject (JSONObject jsonObject) throws JSONException {
         //Loading array of composições from the jsonObject instantiated from the file
         JSONArray arrayComposicoes = jsonObject.getJSONArray("composicoes");
         for (int i = 0; i < arrayComposicoes.length(); i++) {

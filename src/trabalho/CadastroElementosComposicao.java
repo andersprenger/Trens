@@ -1,6 +1,7 @@
 package trabalho;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
             String jsonString = sc.nextLine();
             JSONObject jsonObject = new JSONObject(jsonString);
             loadFromJSONObject(jsonObject);
-        } catch (IOException x) {
+        } catch (IOException | JSONException x) {
             System.err.format("Erro de E/S: %s%n", x);
         }
     }
