@@ -130,8 +130,9 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
     public String toString() {
         StringBuilder str = new StringBuilder("Cadastro Composições:\n");
         for (Composicao c : cadastro) {
+            str.append('\n');
             str.append(c.toString());
-            str.append("\n");
+            str.append('\n');
         }
         return str.toString();
     }
