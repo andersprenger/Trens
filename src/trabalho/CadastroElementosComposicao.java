@@ -20,17 +20,17 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
     }
 
     @Override
-    public void cadastra (ElementoComposicao e) {
+    public void cadastra(ElementoComposicao e) {
         cadastro.add(e);
     }
 
     @Override
-    public int quantidade () {
+    public int quantidade() {
         return cadastro.size();
     }
 
     @Override
-    public ElementoComposicao getPorPosicao (int index) {
+    public ElementoComposicao getPorPosicao(int index) {
         if (index < 0) {
             return null;
         } else if (index >= quantidade()) {
@@ -41,7 +41,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
     }
 
     @Override
-    public ElementoComposicao getPorId (int id) {
+    public ElementoComposicao getPorId(int id) {
         for (ElementoComposicao e : cadastro) {
             if (e.getId() == id) {
                 return e;
@@ -97,7 +97,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
     }
 
     @Override
-    public JSONObject toJSONObject () {
+    public JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
 
         JSONArray array = new JSONArray();

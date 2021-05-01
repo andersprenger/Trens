@@ -16,20 +16,20 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
     private ArrayList<Composicao> cadastro;
     private CadastroElementosComposicao patio;
 
-    public CadastroComposicoes (CadastroElementosComposicao patio) {
+    public CadastroComposicoes(CadastroElementosComposicao patio) {
         cadastro = new ArrayList<>();
         this.patio = patio;
     }
 
-    public void cadastra (Composicao c) {
+    public void cadastra(Composicao c) {
         cadastro.add(c);
     }
 
-    public int quantidade () {
+    public int quantidade() {
         return cadastro.size();
     }
 
-    public Composicao getPorPosicao (int index) {
+    public Composicao getPorPosicao(int index) {
         if (index < 0) {
             return null;
         } else if (index >= quantidade()) {
@@ -39,7 +39,7 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         }
     }
 
-    public Composicao getPorId (int id) {
+    public Composicao getPorId(int id) {
         for (Composicao c : cadastro) {
             if (c.getId() == id) {
                 return c;
@@ -48,7 +48,7 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         return null;
     }
 
-    public boolean removePorId (int id) {
+    public boolean removePorId(int id) {
         for (Composicao c : cadastro) {
             if (c.getId() == id) {
                 cadastro.remove(c);
@@ -76,7 +76,7 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         }
     }
 
-    public void carrega () {
+    public void carrega() {
         String fileName = "composicoes.json";
         Path path = Path.of(fileName).toAbsolutePath();
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))) {
@@ -88,7 +88,7 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         }
     }
 
-    private void loadFromJSONObject (JSONObject jsonObject) throws JSONException {
+    private void loadFromJSONObject(JSONObject jsonObject) throws JSONException {
         //Loading array of composições from the jsonObject instantiated from the file
         JSONArray arrayComposicoes = jsonObject.getJSONArray("composicoes");
         for (int i = 0; i < arrayComposicoes.length(); i++) {
@@ -113,7 +113,7 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         }
     }
 
-    public JSONObject toJSONObject () {
+    public JSONObject toJSONObject() {
         JSONObject jsonObject = new JSONObject();
 
         JSONArray array = new JSONArray();

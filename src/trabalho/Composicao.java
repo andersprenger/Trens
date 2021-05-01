@@ -9,12 +9,12 @@ public class Composicao {
     private int id;
     private ArrayList<ElementoComposicao> composicao;
 
-    public Composicao (int id) {
+    public Composicao(int id) {
         this.id = id;
         this.composicao = new ArrayList<>();
     }
 
-    public Composicao (JSONObject jsonObject) {
+    public Composicao(JSONObject jsonObject) {
         this.id = jsonObject.getInt("id");
         this.composicao = new ArrayList<>();
     }
@@ -47,7 +47,7 @@ public class Composicao {
         return count;
     }
 
-    private ElementoComposicao getElementoComposicao (int posicao) {
+    private ElementoComposicao getElementoComposicao(int posicao) {
         if (posicao >= 0 && posicao < composicao.size()) {
             return composicao.get(posicao);
         }
@@ -62,7 +62,7 @@ public class Composicao {
         return e instanceof Locomotiva ? (Locomotiva) e : null;
     }
 
-    public Vagao getVagao (int posicao) {
+    public Vagao getVagao(int posicao) {
         ElementoComposicao e = getElementoComposicao(posicao);
         if (e == null) {
             return null;
@@ -91,7 +91,7 @@ public class Composicao {
                 break;
             }
         }
-        pesoMaximo *= (double) (10 - (this.getQtdadeVagoes() - 1)) /10.0;
+        pesoMaximo *= (double) (10 - (this.getQtdadeVagoes() - 1)) / 10.0;
         return pesoMaximo;
     }
 
@@ -135,8 +135,14 @@ public class Composicao {
         }
     }
 
-    private boolean desengataElemento (ElementoComposicao e) {
-        if (composicao.get(composicao.size() - 1).getId() == e.getId()) {
+    /**
+     * Método auxiliar que remove um ElementoComposicao do ArrayList cadastro se ele for o ultimo elemento do array. <p/>
+     *
+     * @param e elemento a ser removido.
+     * @return true se o ElementoComposicao e for removido e false caso contrario.
+     */
+    private boolean desengataElemento(ElementoComposicao e) {
+        if (e!= null && composicao.get(composicao.size() - 1).getId() == e.getId()) {
             if (composicao.remove(e)) {
                 e.setIdComposicao(null);
                 return true;
@@ -174,9 +180,9 @@ public class Composicao {
             arr.append("\n");
         }
 
-        return  "Composicao {" +
-                     "id=" + id +
-                     ", composicao=[\n" + arr +
-                     "]\n}";
+        return "Composicao {" +
+                "id=" + id +
+                ", composicao=[\n" + arr +
+                "]\n}";
     }
 }
