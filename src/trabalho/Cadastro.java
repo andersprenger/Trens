@@ -19,5 +19,6 @@ public interface Cadastro<T> {
 
     JSONObject toJSONObject();
 
+    @Override
     String toString();
 }
