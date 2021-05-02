@@ -58,6 +58,26 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
         return e != null && cadastro.remove(e);
     }
 
+    public void listaLocomotivaLivre()
+    {
+        for (ElementoComposicao elemento : cadastro)
+        {
+            if (elemento instanceof Locomotiva && elemento.getId() == -1)
+            {
+                System.out.println(elemento);
+            }
+        }
+    }
+
+    public void listaVagaoLivre()
+    {
+        for (ElementoComposicao elemento : cadastro) {
+            if (elemento instanceof Vagao && elemento.getId() == -1) {
+                System.out.println(elemento);
+            }
+        }
+    }
+
     @Override
     public void carrega() {
         String fileName = "elementos.json";
@@ -119,4 +139,5 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
         }
         return str.toString();
     }
+
 }
