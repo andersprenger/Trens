@@ -147,6 +147,11 @@ public class Composicao {
         return desengataElemento(v);
     }
 
+    public boolean desengataUltimoElemento() {
+        ElementoComposicao e = this.getElementoComposicao(composicao.size() - 1);
+        return desengataElemento(e);
+    }
+
     public void desfazer() {
         for (int i = composicao.size() - 1; i >= 0; i--) {
             desengataElemento(getElementoComposicao(i));
