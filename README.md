@@ -7,3 +7,8 @@
 ###### Turma 128 - Professor: `Bernardo Copstein`
 
 `02 de maio de 2021`
+
+#Informações Importantes
+
+###Localização do Executável
+A classe Main da tarefa encontra-se dentro do package trabalho na pasta /src, em: `trabalho.Main`
