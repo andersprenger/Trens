@@ -34,7 +34,7 @@ public class Menu {
             switch (numeroOpcao) {
                 case 1 -> criarComposicao();
                 case 2 -> editarComposicao();
-                case 3 -> System.out.println(cc);
+                case 3 -> listarComposicao();
                 case 4 -> desfazerComposicao();
                 case 5 -> {
                     System.out.println("Encerrando o programa");
@@ -101,10 +101,20 @@ public class Menu {
 
     }
 
+    private void listarComposicao() {
+        if (cc.quantidade() == 0) {
+            System.out.println("Não existem composições no cadastro.");
+        } else {
+            System.out.println(cc);
+        }
+    }
+
     private void desfazerComposicao() {
+        System.out.println(cc);
         System.out.println("Digite o id da composição que deseja desfazer: ");
         int idDaComposicaoDesfazer = in.nextInt();
-        cc.removePorId(idDaComposicaoDesfazer);
+        boolean removeu = cc.removePorId(idDaComposicaoDesfazer);
+        System.out.println(removeu? "Composição removida." : " Não foi possível remover a composição.");
     }
 
     private void popularCE() {
