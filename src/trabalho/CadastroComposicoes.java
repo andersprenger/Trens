@@ -52,14 +52,7 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         for (Composicao c : cadastro) {
             if (c.getId() == id) {
                 cadastro.remove(c);
-                int ultimaPosicao = c.getQtdadeVagoes() + c.getQtdadeLocomotivas() - 1;
-                for (int i = ultimaPosicao; i >= 0; i--) {
-                    if (c.getVagao(i) != null) {
-                        c.desengataVagao(c.getVagao(i));
-                    } else {
-                        c.desengataLocomotiva(c.getLocomotiva(i));
-                    }
-                }
+                c.desfazer();
                 return true;
             }
         }
