@@ -38,7 +38,7 @@ public class Composicao {
     public int getQtdadeVagoes() {
         int count = 0;
         for (ElementoComposicao e : composicao) {
-            if (e instanceof Vagao) {
+            if (e instanceof Vagao || e instanceof VagaoPassageiro) {
                 count++;
             } else {
                 break;
