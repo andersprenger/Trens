@@ -84,6 +84,7 @@ public class Menu {
             System.out.println("Não há composições no cadastro.");
             return;
         }
+        System.out.println(cc);
         System.out.println("Digite o identificador da composição que deseja editar: ");
         int idDaComposicao = in.nextInt();
         if (cc.getPorId(idDaComposicao) == null) {
@@ -93,8 +94,8 @@ public class Menu {
         boolean editandoComposicao = true;
         while (editandoComposicao) {
             System.out.println("Digite um numero correspondente com o que deseja fazer: ");
-            System.out.println("1 - Inserir locomotiva");
-            System.out.println("2 - Inserir vagão");
+            System.out.println("1 - Engatar locomotiva");
+            System.out.println("2 - Engatar vagão");
             System.out.println("3 - Remover o ultimo elemento da composição");
             System.out.println("4 - Listar locomotivas livres");
             System.out.println("5 - Listar vagões livres");
@@ -107,13 +108,16 @@ public class Menu {
                     ce.listarLocomotivaLivre();
                     System.out.println("Digite o id da locomotiva");
                     int idDaLocomotiva = in.nextInt();
-                    cc.getPorId(idDaComposicao).engataLocomotiva((Locomotiva) ce.getPorId(idDaLocomotiva));
+                    boolean b = cc.getPorId(idDaComposicao).engataLocomotiva((Locomotiva) ce.getPorId(idDaLocomotiva));
+                    System.out.println(b? "Locomotiva engatada.":"Não foi possível engatar a locomotiva.");
                 }
                 case 2 -> {
                     ce.listarVagaoLivre();
                     System.out.println("Digite o id do vagão");
                     int idDoVagao = in.nextInt();
-                    cc.getPorId(idDaComposicao).engataVagao((Vagao) ce.getPorId(idDoVagao));
+                    boolean b = cc.getPorId(idDaComposicao).engataVagao((Vagao) ce.getPorId(idDoVagao));
+                    System.out.println(b? "Vagão engatado.":"Não foi possível engatar o vagão.");
+
                 }
                 case 3 -> {
                     boolean b = cc.getPorId(idDaComposicao).desengataUltimoElemento();//remove o ultimo elemento da composição
