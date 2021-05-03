@@ -62,7 +62,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
     {
         for (ElementoComposicao elemento : cadastro)
         {
-            if (elemento instanceof Locomotiva && elemento.getId() == -1)
+            if (elemento instanceof Locomotiva && elemento.getIdComposicao() == -1)
             {
                 System.out.println(elemento);
             }
@@ -72,7 +72,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
     public void listarVagaoLivre()
     {
         for (ElementoComposicao elemento : cadastro) {
-            if (elemento instanceof Vagao && elemento.getId() == -1) {
+            if (elemento instanceof Vagao && elemento.getIdComposicao() == -1) {
                 System.out.println(elemento);
             }
         }
