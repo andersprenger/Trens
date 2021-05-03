@@ -88,6 +88,7 @@ public class Menu {
         int idDaComposicao = in.nextInt();
         if (cc.getPorId(idDaComposicao) == null) {
             System.out.println("Composição não encontrada.");
+            return;
         }
         boolean editandoComposicao = true;
         while (editandoComposicao) {
