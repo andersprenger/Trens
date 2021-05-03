@@ -12,6 +12,10 @@ public class Menu {
         ce = new CadastroElementosComposicao();
         cc = new CadastroComposicoes(ce);
         cc.carrega();
+        if (cc.quantidade() == 0) {
+            System.out.println("Um novo cadastro dos elementos de composição no pátio foi criado!");
+            popularCE();
+        }
         ce.carrega();
     }
 
@@ -101,5 +105,35 @@ public class Menu {
         System.out.println("Digite o id da composição que deseja desfazer: ");
         int idDaComposicaoDesfazer = in.nextInt();
         cc.removePorId(idDaComposicaoDesfazer);
+    }
+
+    private void popularCE() {
+        ce.cadastra(new Locomotiva(1, 200000d, 21));
+        ce.cadastra(new Locomotiva(2, 150000d, 15));
+        ce.cadastra(new Locomotiva(3, 250000d, 16));
+        ce.cadastra(new Locomotiva(4, 180000d, 18));
+        ce.cadastra(new Locomotiva(5, 190000d, 20));
+
+        ce.cadastra(new Vagao(100, 10000));
+        ce.cadastra(new Vagao(200, 80000));
+        ce.cadastra(new Vagao(300, 12000));
+        ce.cadastra(new Vagao(400, 14000));
+        ce.cadastra(new Vagao(500, 8000));
+        ce.cadastra(new Vagao(600, 21000));
+        ce.cadastra(new Vagao(700, 32000));
+        ce.cadastra(new Vagao(800, 13000));
+        ce.cadastra(new Vagao(900, 15000));
+        ce.cadastra(new Vagao(1000, 10000));
+        ce.cadastra(new Vagao(1100, 18000));
+        ce.cadastra(new Vagao(1200, 20000));
+        ce.cadastra(new Vagao(1300, 10000));
+
+        ce.cadastra(new VagaoPassageiro(19000, 50));
+        ce.cadastra(new VagaoPassageiro(10000, 70));
+        ce.cadastra(new VagaoPassageiro(11000, 68));
+        ce.cadastra(new VagaoPassageiro(12000, 50));
+        ce.cadastra(new VagaoPassageiro(13000, 75));
+
+        ce.persiste();
     }
 }
