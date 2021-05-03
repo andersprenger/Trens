@@ -137,6 +137,9 @@ public class Menu {
     }
 
     private void desfazerComposicao() {
+        if (cc.quantidade() == 0) {
+            System.out.println("Não há composições no cadastro.");
+        }
         System.out.println(cc);
         System.out.println("Digite o id da composição que deseja desfazer: ");
         int idDaComposicaoDesfazer = in.nextInt();
