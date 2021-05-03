@@ -11,4 +11,4 @@
 #Informações Importantes
 
 ###Localização do Executável
-A classe Main da tarefa encontra-se dentro do package trabalho na pasta /src, em: `trabalho.Main`
+A classe Main da tarefa encontra-se dentro do package trabalho na pasta /src, em: `src/trabalho/Main.java`
