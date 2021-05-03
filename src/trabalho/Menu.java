@@ -12,7 +12,7 @@ public class Menu {
         ce = new CadastroElementosComposicao();
         cc = new CadastroComposicoes(ce);
         cc.carrega();
-        if (cc.quantidade() == 0) {
+        if (ce.quantidade() == 0) {
             System.out.println("Um novo cadastro dos elementos de composição no pátio foi criado!");
             popularCE();
         }
