@@ -8,7 +8,7 @@
 
 `02 de maio de 2021`
 
-#Informações Importantes
+# Informações Importantes
 
-###Localização do Executável
+### Localização do Executável
 A classe Main da tarefa encontra-se dentro do package trabalho na pasta /src, em: `src/trabalho/Main.java`
