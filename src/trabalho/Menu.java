@@ -11,12 +11,12 @@ public class Menu {
         in = new Scanner(System.in);
         ce = new CadastroElementosComposicao();
         cc = new CadastroComposicoes(ce);
+        ce.carrega();
         cc.carrega();
-        if (cc.quantidade() == 0) {
+        if (ce.quantidade() == 0) {
             System.out.println("Um novo cadastro dos elementos de composição no pátio foi criado!");
             popularCE();
         }
-        ce.carrega();
     }
 
     public void menu() {
