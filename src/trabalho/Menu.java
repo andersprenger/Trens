@@ -46,7 +46,7 @@ public class Menu {
     private void criarComposicao() {
         System.out.println("Digite o identificador da composição que deseja criar: ");
         int idDaComposicao = in.nextInt();
-        ce.listaLocomotivaLivre();
+        ce.listarLocomotivaLivre();
         System.out.println("Digite o identificador da locomotiva que deseja usar para criar a composição: ");
         int idDaLocomotiva = in.nextInt();
         Locomotiva locomotiva = (Locomotiva) ce.getPorId(idDaLocomotiva);
@@ -73,23 +73,23 @@ public class Menu {
 
             switch (numeroOpcao) {
                 case 1 -> {
-                    ce.listaLocomotivaLivre();
+                    ce.listarLocomotivaLivre();
                     System.out.println("Digite o id da locomotiva");
                     int idDaLocomotiva = in.nextInt();
                     cc.getPorId(idDaComposicao).engataLocomotiva((Locomotiva) ce.getPorId(idDaLocomotiva));
                 }
                 case 2 -> {
-                    ce.listaVagaoLivre();
+                    ce.listarVagaoLivre();
                     System.out.println("Digite o id do vagão");
                     int idDoVagao = in.nextInt();
                     cc.getPorId(idDaComposicao).engataVagao((Vagao) ce.getPorId(idDoVagao));
                 }
                 case 3 -> {
                     boolean b = cc.getPorId(idDaComposicao).desengataUltimoElemento();//remove o ultimo elemento da composição
-                    System.out.println(b ? "Ultimo Elemento removido" : "Não foi possível remover o ultimo elemento.");
+                    System.out.println(b ? "Ultimo elemento removido." : "Não foi possível remover o ultimo elemento.");
                 }
-                case 4 -> ce.listaLocomotivaLivre();
-                case 5 -> ce.listaVagaoLivre();
+                case 4 -> ce.listarLocomotivaLivre();
+                case 5 -> ce.listarVagaoLivre();
                 case 6 -> editandoComposicao = false;
                 default -> System.out.println("Digitou um valor de edição errado, tente novamente");
             }

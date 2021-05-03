@@ -58,7 +58,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
         return e != null && cadastro.remove(e);
     }
 
-    public void listaLocomotivaLivre()
+    public void listarLocomotivaLivre()
     {
         for (ElementoComposicao elemento : cadastro)
         {
@@ -69,7 +69,7 @@ public class CadastroElementosComposicao implements Cadastro<ElementoComposicao>
         }
     }
 
-    public void listaVagaoLivre()
+    public void listarVagaoLivre()
     {
         for (ElementoComposicao elemento : cadastro) {
             if (elemento instanceof Vagao && elemento.getId() == -1) {
