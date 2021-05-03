@@ -86,16 +86,16 @@ public class CadastroComposicoes implements Cadastro<Composicao> {
         JSONArray arrayComposicoes = jsonObject.getJSONArray("composicoes");
         for (int i = 0; i < arrayComposicoes.length(); i++) {
             Composicao composicao = new Composicao((JSONObject) arrayComposicoes.get(i));
-            //Loading array of elementos de composição from the array of composições
+            //Loading array of "elementos de composição" from the array of composições
             JSONObject jsonComposicao = arrayComposicoes.getJSONObject(i);
             JSONArray arrayElementosDaComposicao = jsonComposicao.getJSONArray("elementosComposicao");
             for (int j = 0; j < arrayElementosDaComposicao.length(); j++) {
-                //Loading an elemento de composição from the array of elementos de composição
+                //Loading an "elemento de composição" from the array of "elementos de composição"
                 JSONObject jsonElemento = arrayElementosDaComposicao.getJSONObject(j);
-                //Getting the elemento de composição in cadastro by it's id
+                //Getting the "elemento de composição" in cadastro by it's id
                 int id = jsonElemento.getInt("id");
                 ElementoComposicao elementoComposicao = patio.getPorId(id);
-                //Adding elemento de composição into cadastro
+                //Adding "elemento de composição" into cadastro
                 if (elementoComposicao instanceof Locomotiva) {
                     composicao.engataLocomotiva((Locomotiva) elementoComposicao);
                 } else {
