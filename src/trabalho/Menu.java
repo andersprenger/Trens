@@ -4,138 +4,102 @@ import java.util.Scanner;
 
 public class Menu {
     private Scanner in;
-    private CadastroElementosComposicao cec;
+    private CadastroElementosComposicao ce;
     private CadastroComposicoes cc;
 
     public Menu() {
         in = new Scanner(System.in);
-        cec = new CadastroElementosComposicao();
-        cc = new CadastroComposicoes(cec);
+        ce = new CadastroElementosComposicao();
+        cc = new CadastroComposicoes(ce);
         cc.carrega();
-        cec.carrega();
+        ce.carrega();
     }
 
-    public void startaMenu() {
-
+    public void menu() {
         boolean estouNoMenu = true;
 
         while (estouNoMenu) {
             System.out.println("Digite um numero correspondente com o que deseja fazer: ");
-            System.out.println("1 - Criar uma composicao");
-            System.out.println("2 - Editar uma composicao");
-            System.out.println("3 - Listar todas as composicoes");
-            System.out.println("4 - Desfazer uma composicao");
+            System.out.println("1 - Criar uma composição");
+            System.out.println("2 - Editar uma composição");
+            System.out.println("3 - Listar todas as composições");
+            System.out.println("4 - Desfazer uma composição");
             System.out.println("5 - Encerrar o programa");
-            int desejoFazerNoMenu = in.nextInt();
+            int numeroOpcao = in.nextInt();
 
-            switch (desejoFazerNoMenu) {
-                case 1:
-                    System.out.println("Digite o identificador da composicao que deseja criar: ");
-                    int idDaComposicao = in.nextInt();
-
-                    cec.listaLocomotivaLivre();
-
-                    System.out.println("Decida qual a locomotiva que deseja engatar como a primeira da composicao pelo id dela: ");
-                    int idDaLocomotiva = in.nextInt();
-
-
-                    Locomotiva locomotiva = (Locomotiva) cec.getPorId(idDaLocomotiva);
-
-                    criaComposicao(idDaComposicao, locomotiva);
-
-                    break;
-                case 2:
-                    System.out.println("Digite o identificador da composicao que deseja editar: ");
-                    int idDaComposicaoEditavel = in.nextInt();
-
-                    editaComposicao(idDaComposicaoEditavel);
-
-                    break;
-                case 3:
-                    System.out.println(cc.toString());
-
-                    break;
-                case 4:
-                    System.out.println("Digite o id da composicao que deseja desfazer");
-                    int idDaComposicaoDesfazer = in.nextInt();
-
-                    desfazComposicao(idDaComposicaoDesfazer);
-
-                    break;
-                case 5:
+            switch (numeroOpcao) {
+                case 1 -> criarComposicao();
+                case 2 -> editarComposicao();
+                case 3 -> System.out.println(cc);
+                case 4 -> desfazerComposicao();
+                case 5 -> {
                     System.out.println("Encerrando o programa");
                     estouNoMenu = false;
                     cc.persiste();
-                    cec.persiste();
-                    break;
-                default:
-                    System.out.println("Digitou uma opcao inexistente no menu, tente novamente");
-                    break;
+                    ce.persiste();
+                }
+                default -> System.out.println("Opção invalida, tente novamente...");
             }
         }
     }
 
-    public void criaComposicao(int idDaComposicao, Locomotiva locomotiva) {
-        Composicao comp = new Composicao(idDaComposicao);    //cria a composicao
-        cc.cadastra(comp);
+    private void criarComposicao() {
+        System.out.println("Digite o identificador da composição que deseja criar: ");
+        int idDaComposicao = in.nextInt();
+        ce.listaLocomotivaLivre();
+        System.out.println("Digite o identificador da locomotiva que deseja usar para criar a composição: ");
+        int idDaLocomotiva = in.nextInt();
+        Locomotiva locomotiva = (Locomotiva) ce.getPorId(idDaLocomotiva);
+        Composicao composicao = new Composicao(idDaComposicao);    //cria a composição
+        cc.cadastra(composicao);
 
-        comp.engataLocomotiva(locomotiva);                    //engata a locomotiva na composicao
+        composicao.engataLocomotiva(locomotiva);                    //engata a locomotiva na composição
     }
 
-    public void editaComposicao(int idDaComposicao) {
+    private void editarComposicao() {
+        System.out.println("Digite o identificador da composicao que deseja editar: ");
+        int idDaComposicao = in.nextInt();
         boolean editandoComposicao = true;
         while (editandoComposicao) {
             System.out.println("Digite um numero correspondente com o que deseja fazer: ");
             System.out.println("1 - Inserir locomotiva");
-            System.out.println("2 - Inserir vagao");
-            System.out.println("3 - Remover o ultimo elemento da composicao");
+            System.out.println("2 - Inserir vagão");
+            System.out.println("3 - Remover o ultimo elemento da composição");
             System.out.println("4 - Listar locomotivas livres");
-            System.out.println("5 - Listar vagoes livres");
-            System.out.println("6 - Encerrar a edicao da composicao");
+            System.out.println("5 - Listar vagões livres");
+            System.out.println("6 - Encerrar a edição da composição");
 
-            int desejoEditarComposicao = in.nextInt();
+            int numeroOpcao = in.nextInt();
 
-            switch (desejoEditarComposicao) {
-                case 1:
-                    cec.listaLocomotivaLivre();
+            switch (numeroOpcao) {
+                case 1 -> {
+                    ce.listaLocomotivaLivre();
                     System.out.println("Digite o id da locomotiva");
                     int idDaLocomotiva = in.nextInt();
-                    cc.getPorId(idDaComposicao).engataLocomotiva((Locomotiva) cec.getPorId(idDaLocomotiva));
-
-
-                    break;
-                case 2:
-                    cec.listaVagaoLivre();
-                    System.out.println("Digite o id do vagao");
+                    cc.getPorId(idDaComposicao).engataLocomotiva((Locomotiva) ce.getPorId(idDaLocomotiva));
+                }
+                case 2 -> {
+                    ce.listaVagaoLivre();
+                    System.out.println("Digite o id do vagão");
                     int idDoVagao = in.nextInt();
-
-                    cc.getPorId(idDaComposicao).engataVagao((Vagao) cec.getPorId(idDoVagao));
-
-                    break;
-                case 3:
-                    cc.getPorId(idDaComposicao).desengataUltimoElemento();      //remove o ultimo elemento da composicao
-
-                    break;
-                case 4:
-                    cec.listaLocomotivaLivre();
-
-                    break;
-                case 5:
-                    cec.listaVagaoLivre();
-
-                    break;
-                case 6:
-                    editandoComposicao = false;
-                    break;
-                default:
-                    System.out.println("Digitou um valor de edicao errado, tente novamente");
-                    break;
+                    cc.getPorId(idDaComposicao).engataVagao((Vagao) ce.getPorId(idDoVagao));
+                }
+                case 3 -> {
+                    boolean b = cc.getPorId(idDaComposicao).desengataUltimoElemento();//remove o ultimo elemento da composição
+                    System.out.println(b ? "Ultimo Elemento removido" : "Não foi possível remover o ultimo elemento.");
+                }
+                case 4 -> ce.listaLocomotivaLivre();
+                case 5 -> ce.listaVagaoLivre();
+                case 6 -> editandoComposicao = false;
+                default -> System.out.println("Digitou um valor de edição errado, tente novamente");
             }
         }
 
     }
 
-    public void desfazComposicao(int idDaComposicao) {
-        cc.removePorId(idDaComposicao);
+    private void desfazerComposicao() {
+        System.out.println("Digite o id da composição que deseja desfazer: ");
+        int idDaComposicaoDesfazer = in.nextInt();
+        cc.removePorId(idDaComposicaoDesfazer);
     }
 }
