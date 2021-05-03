@@ -48,12 +48,31 @@ public class Menu {
     }
 
     private void criarComposicao() {
-        System.out.println("Digite o identificador da composição que deseja criar: ");
-        int idDaComposicao = in.nextInt();
+        int idDaComposicao;
+        while (true){
+            System.out.println("Digite o identificador da composição que deseja criar: ");
+            idDaComposicao = in.nextInt();
+            if (cc.getPorId(idDaComposicao) != null) {
+                System.out.println("Já foi cadastrada uma composição com esse id, favor escolher uma nova opção.");
+            } else {
+                break;
+            }
+        }
         ce.listarLocomotivaLivre();
-        System.out.println("Digite o identificador da locomotiva que deseja usar para criar a composição: ");
-        int idDaLocomotiva = in.nextInt();
-        Locomotiva locomotiva = (Locomotiva) ce.getPorId(idDaLocomotiva);
+        Locomotiva locomotiva;
+        while (true) {
+            System.out.println("Digite o identificador da locomotiva que deseja usar para criar a composição: ");
+            int idDaLocomotiva = in.nextInt();
+            ElementoComposicao e = ce.getPorId(idDaLocomotiva);
+            if (e instanceof Locomotiva && e.getIdComposicao() == -1) {
+                locomotiva = (Locomotiva) e;
+                break;
+            } else {
+                System.out.print(e instanceof Locomotiva? "Id invalido, " : "Locomotiva já está numa composição, ");
+                System.out.println("tente novamente.");
+            }
+        }
+
         Composicao composicao = new Composicao(idDaComposicao);    //cria a composição
         cc.cadastra(composicao);
 
@@ -61,8 +80,14 @@ public class Menu {
     }
 
     private void editarComposicao() {
-        System.out.println("Digite o identificador da composicao que deseja editar: ");
+        if (cc.quantidade() == 0) {
+            System.out.println("Não há composições no cadastro.");
+        }
+        System.out.println("Digite o identificador da composição que deseja editar: ");
         int idDaComposicao = in.nextInt();
+        if (cc.getPorId(idDaComposicao) == null) {
+            System.out.println("Composição não encontrada.");
+        }
         boolean editandoComposicao = true;
         while (editandoComposicao) {
             System.out.println("Digite um numero correspondente com o que deseja fazer: ");
